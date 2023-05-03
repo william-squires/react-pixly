@@ -3,13 +3,13 @@ import axios from "axios"
 
 
 /** form for uploading images to backend
- * 
+ *
  * Props
  * -none
- * 
+ *
  * State
  * -formData: {file to upload}
- * 
+ *
  * App ->UploadForm
  */
 function UploadForm() {
