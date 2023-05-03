@@ -1,15 +1,14 @@
 
 import './App.css';
-import UploadForm from './UploadForm';
-import DownloadForm from "./DownloadForm";
-import ImageList from './ImageList';
+import { BrowserRouter } from "react-router-dom";
+import RoutesList from './RoutesList';
 
 function App() {
   return (
     <div className="App">
-      <UploadForm />
-      <DownloadForm />
-      <ImageList />
+      <BrowserRouter>
+        <RoutesList />
+      </BrowserRouter>
     </div>
   );
 }

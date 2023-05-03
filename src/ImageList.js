@@ -1,15 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Image from "./Image";
 
-/** renders list of all images 
- * 
+/** renders list of all images
+ *
  * Props
  * -none
- * 
+ *
  * State
  * -imageIds
- * 
- * App -> ImageList
+ *
+ * App -> ImageList --> Image
 */
 function ImageList() {
     const [imageIds, setImageIds] = useState([])
@@ -26,9 +27,9 @@ function ImageList() {
 
     return(
         <div>
-            {imageIds && 
+            {imageIds &&
             imageIds.map((img, idx) => {
-                return <img key={idx} width={500} height={500} src={`${img.url}`} alt={`img-${idx}`} />
+                return <Image key={idx} imgUrl={img.url} />
             })}
         </div>
     )

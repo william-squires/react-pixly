@@ -1,6 +1,6 @@
 import { useState } from "react"
 import axios from "axios"
-
+import Editor from "./Editor";
 
 /** form for uploading images to backend
  *
@@ -12,7 +12,7 @@ import axios from "axios"
  *
  * App ->UploadForm
  */
-function UploadForm() {
+function UploadForm({getImage}) {
     const [formData, setFormData] = useState("")
     console.log(formData);
 
@@ -24,18 +24,20 @@ function UploadForm() {
 
     async function handleSubmit(evt) {
         evt.preventDefault();
-        const fData = new FormData();
-        fData.append("file", formData);
-        await axios.post("http://localhost:5000/",
-            fData,
-            {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                    'Access-Control-Allow-Origin': '*',
-                }
-            });
+        // const fData = new FormData();
+        // fData.append("file", formData);
+        // await axios.post("http://localhost:5000/",
+        //     fData,
+        //     {
+        //         headers: {
+        //             "Content-Type": "multipart/form-data",
+        //             'Access-Control-Allow-Origin': '*',
+        //         }
+        //     });
+        getImage(formData);
         setFormData("");
     }
+
     return (
         <form onSubmit={handleSubmit}>
             <input
