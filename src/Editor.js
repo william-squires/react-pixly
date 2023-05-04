@@ -2,6 +2,8 @@ import UploadForm from "./UploadForm";
 import { useState } from "react";
 import Image from "./Image";
 import axios from "axios";
+require("jimp/browser/lib/jimp.js"); 
+const { Jimp } = window;
 
 /** Editor : edit a single image
  *
@@ -42,6 +44,38 @@ function Editor ({ imgUrl }) {
         });
   }
 
+  async function makeGreyscale() {
+    const f = await Jimp.read(fileDataUrl);
+    f.greyscale();
+    const base = await f.getBase64Async(Jimp.AUTO)
+    const fetched = await fetch(base)
+    console.log("FFF", f);
+    console.log("base64", base)
+    console.log("Fetch", fetched)
+    setWorkingImage(base)
+    setFileDataUrl(base)
+  }
+
+  async function makeSepia() {
+    const f = await Jimp.read(fileDataUrl);
+    f.sepia();
+    const base = await f.getBase64Async(Jimp.AUTO)
+    console.log("FFF", f);
+    console.log("base64", base)
+    setWorkingImage(base)
+    setFileDataUrl(base)
+  }
+
+  async function blur() {
+    const f = await Jimp.read(fileDataUrl);
+    f.blur(2);
+    const base = await f.getBase64Async(Jimp.AUTO)
+    console.log("FFF", f);
+    console.log("base64", base)
+    setWorkingImage(base)
+    setFileDataUrl(base)
+  }
+
   return (
   <div className="Editor">
     <UploadForm getImage={getImage}/>
@@ -49,7 +83,13 @@ function Editor ({ imgUrl }) {
       {workingImage && <Image imgUrl={fileDataUrl} />}
     </div>
     <div className="Editor editingTools">
-
+      <button onClick={makeGreyscale}>Greyscale</button>
+    </div>
+    <div className="Editor editingTools">
+      <button onClick={makeSepia}>Sepia</button>
+    </div>
+    <div className="Editor editingTools">
+      <button onClick={blur}>Blur</button>
     </div>
 
     <div className="Editor imageSubmit">
