@@ -26,7 +26,7 @@ function ImageList() {
     }, [])
 
     return(
-        <div>
+        <div className="ImageList">
             {imageIds &&
             imageIds.map((img, idx) => {
                 return <Image key={idx} imgUrl={img.url} />

@@ -1,3 +1,4 @@
+import "./Image.css";
 /** Image: shows a single image
  *
  * Props: imgUrl
@@ -10,7 +11,7 @@
 function Image ({ imgUrl }) {
   return (
     <div className="Image">
-      <img width={500} height={500} src={`${imgUrl}`} alt={`imgUrl`} />
+      <img className="Image singleImage" width={500} src={`${imgUrl}`} alt={`imgUrl`} />
     </div>
   )
 }

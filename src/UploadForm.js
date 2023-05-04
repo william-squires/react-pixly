@@ -1,6 +1,8 @@
 import { useState } from "react"
 import axios from "axios";
 import Editor from "./Editor";
+import "./UploadForm.css";
+
 
 /** form for uploading images to backend
  *
@@ -39,14 +41,14 @@ function UploadForm({getImage}) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="UploadForm" onSubmit={handleSubmit}>
             <input
                 type="file"
                 accept="image/*"
                 value={formData.file}
                 onChange={handleChange}>
             </input>
-            <button>Upload!</button>
+            <button className="UploadForm upload-btn">Upload!</button>
         </form>
     )
 }

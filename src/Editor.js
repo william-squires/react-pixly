@@ -2,6 +2,7 @@ import UploadForm from "./UploadForm";
 import { useState } from "react";
 import Image from "./Image";
 import axios from "axios";
+import "./Editor.css";
 
 /** Editor : edit a single image
  *
@@ -53,9 +54,12 @@ function Editor ({ imgUrl }) {
     </div>
 
     <div className="Editor imageSubmit">
-      <button onClick={uploadImageToBucket}>Submit Edited Image</button>
+      <button className="Editor submit-btn" onClick={uploadImageToBucket}>
+        Submit Image
+      </button>
     </div>
-  </div>)
+  </div>
+  )
 }
 
 export default Editor;
