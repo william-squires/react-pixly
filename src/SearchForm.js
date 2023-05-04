@@ -1,15 +1,16 @@
 import { useState } from "react";
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 
-
-/** Form for searching by description 
- * 
+/** Form for searching by description
+ *
  * Props
  * -search()
- * 
+ *
  * State
  * -formData
- * 
+ *
  * SearchPage -> SearchForm
 */
 function SearchForm({ search }) {
@@ -32,19 +33,18 @@ function SearchForm({ search }) {
     }
 
     return (
-        <div className="DownloadForm">
-            <form onSubmit={handleSubmit}>
-                <input
-                    id="description"
+        <Form className="d-flex" onSubmit={handleSubmit}>
+                <Form.Control
                     name="description"
-                    className="form-control"
+                    type="search"
                     placeholder="Search"
-                    onChange={handleChange}
+                    className="me-2"
+                    aria-label="Search"
                     value={formData.description}
+                    onChange={handleChange}
                 />
-                <button>Search</button>
-            </form>
-        </div>
+            <Button variant="outline-success">Search</Button>
+        </Form>
     )
 }
 

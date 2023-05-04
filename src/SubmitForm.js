@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import "./SubmitForm.css";
 
 
 /** Form for submitting files to backend */
@@ -23,17 +23,17 @@ function SubmitForm({ submit }) {
     }
 
     return (
-        <div className="DownloadForm">
+        <div className="SubmitForm">
             <form onSubmit={handleSubmit}>
                 <input
                     id="description"
                     name="description"
-                    className="form-control"
+                    className="SubmitForm form-control"
                     placeholder="Enter a description"
                     onChange={handleChange}
                     value={formData.description}
                 />
-                <button>Submit Image</button>
+                <button className="submit-btn">Submit Image</button>
             </form>
         </div>
     )

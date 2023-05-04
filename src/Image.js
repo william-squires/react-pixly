@@ -11,7 +11,7 @@ import "./Image.css";
 function Image ({ imgUrl }) {
   return (
     <div className="Image">
-      <img className="Image singleImage" width={500} src={`${imgUrl}`} alt={`imgUrl`} />
+      <img className="Image singleImage" src={`${imgUrl}`} alt={`imgUrl`} />
     </div>
   )
 }
