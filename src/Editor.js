@@ -22,25 +22,30 @@ const { Jimp } = window;
 
 function Editor ({ imgUrl }) {
   const [jimpImage, setJimpImage] = useState(null);
-  const [imgBase64, setImgBase64] = useState(null)
-  const [editedImage, setEditedImage] = useState(null)
-  console.log("jimpImg=", jimpImage);
-  console.log(typeof imgBase64);
+  const [imgBase64, setImgBase64] = useState(null);
+  const [editedImage, setEditedImage] = useState(null);
+  const [fileName, setFileName] = useState('');
+  // console.log("jimpImg=", jimpImage);
+  // console.log(typeof imgBase64);
+  // console.log("filename=", fileName);
+  console.log("editedImg=", editedImage);
 
   /** Get image from upload and save it in state */
   async function getImage(formData){
     console.log("formData in editor fn=", formData);
-    const url = URL.createObjectURL(formData)
-    const img = await Jimp.read(url)
-    setJimpImage(img)
-    setImgBase64(await img.getBase64Async(Jimp.AUTO))
-    setEditedImage(img)
+    const url = URL.createObjectURL(formData);
+    const img = await Jimp.read(url);
+    setJimpImage(img);
+    setImgBase64(await img.getBase64Async(Jimp.AUTO));
+    setEditedImage(img);
+    setFileName(formData.name);
   }
 
   async function uploadImageToBucket(evt){
     evt.preventDefault();
     await axios.post("http://localhost:5000/",
-        {encodedImage: imgBase64});
+        {name: fileName, encodedImage: imgBase64, exif: jimpImage._exif},
+        {headers: {'Access-Control-Allow-Origin': '*'}})
   }
 
   async function makeGreyscale() {
