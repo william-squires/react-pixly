@@ -22,9 +22,10 @@ const { Jimp } = window;
 
 function Editor ({ imgUrl }) {
   const [jimpImage, setJimpImage] = useState(null);
-  console.log("jimpImg=", jimpImage);
   const [imgBase64, setImgBase64] = useState(null)
   const [editedImage, setEditedImage] = useState(null)
+  console.log("jimpImg=", jimpImage);
+  console.log(typeof imgBase64);
 
   /** Get image from upload and save it in state */
   async function getImage(formData){
@@ -38,16 +39,8 @@ function Editor ({ imgUrl }) {
 
   async function uploadImageToBucket(evt){
     evt.preventDefault();
-    const fData = new FormData();
-    fData.append("file", imgBase64);
     await axios.post("http://localhost:5000/",
-        fData,
-        {
-            headers: {
-                "Content-Type": "multipart/form-data",
-                'Access-Control-Allow-Origin': '*',
-            }
-        });
+        {encodedImage: imgBase64});
   }
 
   async function makeGreyscale() {
