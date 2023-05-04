@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "./Image";
 import axios from "axios";
 import "./Editor.css";
+import SubmitForm from "./SubmitForm";
 require("jimp/browser/lib/jimp.js");
 const { Jimp } = window;
 
@@ -41,10 +42,12 @@ function Editor ({ imgUrl }) {
     setFileName(formData.name);
   }
 
-  async function uploadImageToBucket(evt){
-    evt.preventDefault();
+  async function uploadImageToBucket(formData){
     await axios.post("http://localhost:5000/",
-        {name: fileName, encodedImage: imgBase64, exif: jimpImage._exif},
+        {name: fileName,
+           encodedImage: imgBase64
+           , exif: jimpImage._exif,
+          description: formData.description},
         {headers: {'Access-Control-Allow-Origin': '*'}})
   }
 
@@ -94,12 +97,8 @@ function Editor ({ imgUrl }) {
       <button onClick={reset}>Reset</button>
     </div>
 
-    <div className="Editor imageSubmit">
-      <button className="Editor submit-btn" onClick={uploadImageToBucket}>
-        Submit Image
-      </button>
+    <SubmitForm submit={uploadImageToBucket}/>
     </div>
-  </div>
   )
 }
 
