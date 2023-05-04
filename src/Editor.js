@@ -2,9 +2,10 @@ import UploadForm from "./UploadForm";
 import { useState } from "react";
 import Image from "./Image";
 import axios from "axios";
+import "./Editor.css";
 require("jimp/browser/lib/jimp.js");
 const { Jimp } = window;
-import "./Editor.css";
+
 
 /** Editor : edit a single image
  *
