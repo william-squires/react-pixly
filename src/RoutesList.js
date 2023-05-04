@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import UploadForm from './UploadForm';
 import DownloadForm from "./DownloadForm";
+import SearchPage from "./SearchPage";
 import ImageList from './ImageList';
 import Image from './Image';
 import Editor from "./Editor";
@@ -22,6 +23,7 @@ function RoutesList () {
        <Route path="/new" element={<Editor />} />
        {/* <Route path="/download" element={<DownloadForm />} /> */}
        <Route path="/all" element={<ImageList />} />
+       <Route path="/search" element={<SearchPage />} />
        <Route path="*" element={<Homepage />} />
     </Routes>
   )
