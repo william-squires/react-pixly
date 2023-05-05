@@ -10,7 +10,11 @@
 }
 
 /* .editingTools {
-    margin: 5px;
+    border: 1px solid black;
+} */
+
+/* .slider {
+  border: 1px solid blue;
 } */
 
 .imageOnly {

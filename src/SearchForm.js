@@ -1,6 +1,5 @@
 import { useState } from "react";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import "./SearchForm.css";
 
 
 /** Form for searching by description
@@ -14,8 +13,12 @@ import Button from 'react-bootstrap/Button';
  * SearchPage -> SearchForm
 */
 function SearchForm({ search }) {
-    const [formData, setFormData] = useState({ searchTerm: "", searchMethod: "description" });
-    console.log(formData)
+    const [formData, setFormData] = useState(
+        {
+            searchTerm: "",
+            searchMethod: "description"
+        });
+
     /** Update form input. */
     function handleChange(evt) {
         const input = evt.target;
@@ -35,21 +38,21 @@ function SearchForm({ search }) {
     }
 
     return (
-        <form className="d-flex" onSubmit={handleSubmit}>
+        <form className="SearchForm" onSubmit={handleSubmit}>
                 <input
+                    className="search-input"
                     name="searchTerm"
                     type="search"
                     placeholder="Search"
-                    className="me-2"
                     aria-label="Search"
                     value={formData.searchTerm}
                     onChange={handleChange}
                 />
                 <select
+                    className="searchForm-select"
                     name="searchMethod"
                     type="select"
                     placeholder="Search"
-                    className="me-2"
                     aria-label="Search"
                     value={formData.searchMethod}
                     onChange={handleChange}>
@@ -57,7 +60,7 @@ function SearchForm({ search }) {
                     <option value="make">Camera Make</option>
                     <option value="model">Camera Model</option>
                 </select>
-            <button variant="outline-success">Search</button>
+            <button className="searchForm-btn">Search</button>
         </form>
     )
 }

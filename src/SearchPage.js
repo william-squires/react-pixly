@@ -1,9 +1,7 @@
 import SearchForm from "./SearchForm";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import Image from "./Image";
+import { searchImages } from "./ApiCalls";
 import { useState } from "react";
-import axios from "axios";
 
 /** page for searching for images by description
  *
@@ -19,20 +17,19 @@ function SearchPage() {
     const [imageUrls, setImageUrls] = useState([]);
 
     async function search(formData) {
-        const resp = await axios.get(
-            `http://localhost:5000/search?method=${formData.searchMethod}&term=${formData.searchTerm}`,
-            { headers: { 'Access-Control-Allow-Origin': '*' } });
-        console.log(resp.data);
-        setImageUrls(resp.data);
+        const resp = await searchImages(
+            formData.searchMethod,
+            formData.searchTerm
+        );
+        setImageUrls(resp);
     }
-
 
     return (
         <div>
-            <SearchForm search={search}/>
+            <SearchForm search={search} />
             {imageUrls.map((url, idx) => {
-                return <Image key={idx} imgUrl={url.url}/>
-            } )}
+                return <Image key={idx} imgUrl={url.url} />;
+            })}
         </div>
 
     );

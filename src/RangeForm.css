@@ -1,3 +1,10 @@
 .RangeForm .rangeSlider {
     width: 300px;
 }
+
+.rangeBorder {
+    border: 1px solid black;
+    padding: 2px;
+    border-radius: 4px;
+    margin: 2px;
+}

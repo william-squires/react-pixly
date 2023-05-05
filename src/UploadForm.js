@@ -1,6 +1,4 @@
 import { useState } from "react"
-import axios from "axios";
-import Editor from "./Editor";
 import "./UploadForm.css";
 
 
@@ -24,18 +22,9 @@ function UploadForm({getImage}) {
         setFormData(f);
     }
 
+    /** handle submit of form and reset form data */
     async function handleSubmit(evt) {
         evt.preventDefault();
-        // const fData = new FormData();
-        // fData.append("file", formData);
-        // await axios.post("http://localhost:5000/",
-        //     fData,
-        //     {
-        //         headers: {
-        //             "Content-Type": "multipart/form-data",
-        //             'Access-Control-Allow-Origin': '*',
-        //         }
-        //     });
         getImage(formData);
         setFormData("");
     }

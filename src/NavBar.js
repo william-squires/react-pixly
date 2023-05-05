@@ -12,7 +12,6 @@ function NavBar() {
           <Nav className="mr-auto">
             <Nav.Link as={Link} to="/new">Editor</Nav.Link>
             <Nav.Link as={Link} to="/all">Images</Nav.Link>
-            <Nav.Link as={Link} to="/download">Download</Nav.Link>
             <Nav.Link as={Link} to="/search">Search</Nav.Link>
           </Nav>
         </Container>

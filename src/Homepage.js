@@ -1,32 +1,30 @@
 import { useEffect, useState } from "react";
 import "./Homepage.css";
+import { getRandomImages } from "./ApiCalls";
 import Carousel from "react-bootstrap/Carousel";
-import axios from "axios";
 
-/** Homepage
+/** Homepage : shows carousel and searchbar & renders upload form
  *
- * Shows carousel and searchbar & renders upload form
+ * Props: none
  *
- * Props: none (batch?)
+ * State: imageUrls [url, url, url, ...]
  *
- * State: imagesForCarousel [{"url": "https://pixly-clupt.s...}, ...]
+ * RoutesList --> Homepage
  */
 
 function Homepage() {
-  const [imageUrls, setImageUrls] = useState(null)
+  const [imageUrls, setImageUrls] = useState(null);
 
   useEffect(function getCarouselImagesOnMount() {
     async function getImages() {
-      const resp = await axios.get(
-        `http://localhost:5000/random?count=5`,
-        { headers: { 'Access-Control-Allow-Origin': '*' } });
-        setImageUrls(resp.data)
+      const randImages = await getRandomImages(5);
+      setImageUrls(randImages);
     }
-    getImages()
-  }, []) 
+    getImages();
+  }, []);
 
   if (!imageUrls) {
-    return <h1>Loading</h1>
+    return <h1>Loading</h1>;
   }
 
   return (

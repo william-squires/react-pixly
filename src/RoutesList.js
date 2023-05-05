@@ -21,7 +21,6 @@ function RoutesList () {
        <Route path="/" element={<Homepage />} />
        <Route path="/Images/:filename" element={<Image />} />
        <Route path="/new" element={<Editor />} />
-       {/* <Route path="/download" element={<DownloadForm />} /> */}
        <Route path="/all" element={<ImageList />} />
        <Route path="/search" element={<SearchPage />} />
        <Route path="*" element={<Homepage />} />

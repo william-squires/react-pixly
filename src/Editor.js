@@ -2,7 +2,7 @@ import UploadForm from "./UploadForm";
 import { useState } from "react";
 import Image from "./Image";
 import RangeForm from "./RangeForm";
-import axios from "axios";
+import { uploadImage } from "./ApiCalls";
 import "./Editor.css";
 import SubmitForm from "./SubmitForm";
 require("jimp/browser/lib/jimp.js");
@@ -27,14 +27,9 @@ function Editor({ imgUrl }) {
   const [imgBase64, setImgBase64] = useState(null);
   const [editedImage, setEditedImage] = useState(null);
   const [fileName, setFileName] = useState('');
-  // console.log("jimpImg=", jimpImage);
-  // console.log(typeof imgBase64);
-  // console.log("filename=", fileName);
-  // console.log("editedImg=", editedImage);
 
   /** Get image from upload and save it in state */
   async function getImage(formData) {
-    // console.log("formData in editor fn=", formData);
     const url = URL.createObjectURL(formData);
     const img = await Jimp.read(url);
     setJimpImage(img);
@@ -43,20 +38,15 @@ function Editor({ imgUrl }) {
     setFileName(formData.name);
   }
 
+  /** Calls upload image to make API call and post image to database */
   async function uploadImageToBucket(formData) {
-    await axios.post("http://localhost:5000/",
-      {
-        name: fileName,
-        encodedImage: imgBase64
-        , exif: jimpImage._exif,
-        description: formData.description
-      },
-      { headers: { 'Access-Control-Allow-Origin': '*' } });
+    uploadImage(fileName, imgBase64, jimpImage._exif, formData.description);
+    setJimpImage(null);
   }
 
+  /** Sets contrast */
   async function setContrast(formData) {
     let num = Number(formData.value);
-    // console.log("num=", num);
     num = num - 5;
     const dec = num / 5;
     const f = editedImage.clone();
@@ -65,9 +55,9 @@ function Editor({ imgUrl }) {
     setImgBase64(await f.getBase64Async(Jimp.AUTO));
   }
 
+  /** Sets brightness */
   async function setBrightness(formData) {
     let num = Number(formData.value);
-    // console.log("num=", num);
     num = num - 5;
     const dec = num / 5;
     const f = editedImage.clone();
@@ -76,6 +66,7 @@ function Editor({ imgUrl }) {
     setImgBase64(await f.getBase64Async(Jimp.AUTO));
   }
 
+  /** Makes an image greyscale */
   async function makeGreyscale() {
     const f = editedImage.clone();
     f.greyscale();
@@ -83,6 +74,7 @@ function Editor({ imgUrl }) {
     setImgBase64(await f.getBase64Async(Jimp.AUTO));
   }
 
+  /** Makes an image sepia */
   async function makeSepia() {
     const f = editedImage.clone();
     f.sepia();
@@ -90,6 +82,7 @@ function Editor({ imgUrl }) {
     setImgBase64(await f.getBase64Async(Jimp.AUTO));
   }
 
+  /** inverts an image */
   async function invert() {
     const f = editedImage.clone();
     f.invert();
@@ -97,6 +90,7 @@ function Editor({ imgUrl }) {
     setImgBase64(await f.getBase64Async(Jimp.AUTO));
   }
 
+  /** blurs an image */
   async function blur(formData) {
     const f = editedImage.clone();
     f.blur(Number(formData.value));
@@ -104,6 +98,7 @@ function Editor({ imgUrl }) {
     setImgBase64(await f.getBase64Async(Jimp.AUTO));
   }
 
+  /** posterizes an image */
   async function posterize(formData) {
     const f = editedImage.clone();
     f.posterize(Number(formData.value));
@@ -111,6 +106,7 @@ function Editor({ imgUrl }) {
     setImgBase64(await f.getBase64Async(Jimp.AUTO));
   }
 
+  /** rotates an image */
   async function rotate(formData) {
     const f = editedImage.clone();
     f.rotate(Number(formData.value), false);
@@ -118,6 +114,7 @@ function Editor({ imgUrl }) {
     setImgBase64(await f.getBase64Async(Jimp.AUTO));
   }
 
+  /** resets the image */
   async function reset() {
     setEditedImage(jimpImage);
     setImgBase64(await jimpImage.getBase64Async(Jimp.AUTO));
