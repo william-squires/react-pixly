@@ -1,5 +1,20 @@
-/* .Homepage {
-    height: 100vh;
-    background-color: #c6b836;
-    color: #4a0404;
-} */
+.Homepage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.carousel {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    width: 60%;
+    height: 60vh;
+    align-self: center;
+
+}
+
+.carousel-img {
+    max-width: 90vw;
+    max-height: 60vh;
+}
