@@ -34,9 +34,9 @@ function RangeForm({min, max, title, submit}) {
   }
 
   return (
-      <Form className="RangeForm contaier-row" onSubmit={handleSubmit}>
+      <Form className="RangeForm container-row" onSubmit={handleSubmit}>
               <Form.Range
-                className="col-8 d-inline"
+                className="col-md-4 d-inline"
                   name="value"
                   type="range"
                   step="1"
@@ -46,7 +46,7 @@ function RangeForm({min, max, title, submit}) {
                   onChange={handleChange}
               />
             <button
-            className="col-4 d-inline" 
+            className="editingButton"
             onSubmit={submit}>{title}</button>
       </Form>
   )
