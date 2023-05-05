@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import "./RangeForm.css"
 
 /** RangeForm
  *
@@ -34,9 +34,9 @@ function RangeForm({min, max, title, submit}) {
   }
 
   return (
-      <Form className="d-flex" onSubmit={handleSubmit}>
-        <Form.Label>{title}</Form.Label>
+      <Form className="RangeForm contaier-row" onSubmit={handleSubmit}>
               <Form.Range
+                className="col-8 d-inline"
                   name="value"
                   type="range"
                   step="1"
@@ -45,7 +45,9 @@ function RangeForm({min, max, title, submit}) {
                   value={formData.value}
                   onChange={handleChange}
               />
-            <button onSubmit={submit}>{title}</button>
+            <button
+            className="col-4 d-inline" 
+            onSubmit={submit}>{title}</button>
       </Form>
   )
 }

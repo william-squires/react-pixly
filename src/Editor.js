@@ -129,35 +129,36 @@ function Editor({ imgUrl }) {
 
       {jimpImage &&
 
-        <div className="Editor editingTools-container">
-          <div className="Editor imageContainer">
-            {imgBase64 && <Image imgUrl={imgBase64} />}
-          </div>
-          <div className="Editor editingTools">
-            <button onClick={makeGreyscale}>Greyscale</button>
-          </div>
-          <div className="Editor editingTools">
-            <button onClick={makeSepia}>Sepia</button>
-          </div>
-          <div className="Editor editingTools">
-            <button onClick={invert}>Invert</button>
-          </div>
+        <div className="Editor editingTools-container container">
+          
+          <div className="col-sm-12 col-md-6 d-inline-block ">
+            <div className="Editor editingTools">
+              <button onClick={makeGreyscale}>Greyscale</button>
+            </div>
+            <div className="Editor editingTools">
+              <button onClick={makeSepia}>Sepia</button>
+            </div>
+            <div className="Editor editingTools">
+              <button onClick={invert}>Invert</button>
+            </div>
+            <RangeForm min={1} max={10} title="blur" submit={blur} />
 
-          <RangeForm min={1} max={10} title="blur" submit={blur} />
+            <RangeForm min={1} max={180} title="rotate" submit={rotate} />
 
-          <RangeForm min={1} max={180} title="rotate" submit={rotate} />
+            <RangeForm min={0} max={10} title="contrast" submit={setContrast} />
 
-          <RangeForm min={0} max={10} title="contrast" submit={setContrast} />
+            <RangeForm min={0} max={50} title="posterize" submit={posterize} />
 
-          <RangeForm min={0} max={50} title="posterize" submit={posterize} />
-
-          <RangeForm min={0} max={10} title="brightness" submit={setBrightness} />
-
+            <RangeForm min={0} max={10} title="brightness" submit={setBrightness} />
           <div className="Editor editingTools">
             <button onClick={reset}>Reset</button>
           </div>
-
+          </div>
+          <div className="Editor imageContainer col-sm-12 col-md-6 d-inline-block">
+            {imgBase64 && <Image imgUrl={imgBase64} />}
+          </div>
           <SubmitForm submit={uploadImageToBucket} />
+
         </div>
       }
     </div>

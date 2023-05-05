@@ -20,7 +20,7 @@ function SearchPage() {
 
     async function search(formData) {
         const resp = await axios.get(
-            `http://localhost:5000/search?description=${formData.description}`,
+            `http://localhost:5000/search?method=${formData.searchMethod}&term=${formData.searchTerm}`,
             { headers: { 'Access-Control-Allow-Origin': '*' } });
         console.log(resp.data);
         setImageUrls(resp.data);

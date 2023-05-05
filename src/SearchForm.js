@@ -14,8 +14,8 @@ import Button from 'react-bootstrap/Button';
  * SearchPage -> SearchForm
 */
 function SearchForm({ search }) {
-    const [formData, setFormData] = useState({ description: "" });
-
+    const [formData, setFormData] = useState({ searchTerm: "", searchMethod: "description" });
+    console.log(formData)
     /** Update form input. */
     function handleChange(evt) {
         const input = evt.target;
@@ -27,24 +27,38 @@ function SearchForm({ search }) {
 
     /** Call parent function and clear form. */
     async function handleSubmit(evt) {
+        console.log(evt);
         evt.preventDefault();
+        console.log("inside handleSubmit")
         search(formData);
-        setFormData({ description: "" });
+        setFormData({ searchTerm: "", searchMethod: "description" });
     }
 
     return (
-        <Form className="d-flex" onSubmit={handleSubmit}>
-                <Form.Control
-                    name="description"
+        <form className="d-flex" onSubmit={handleSubmit}>
+                <input
+                    name="searchTerm"
                     type="search"
                     placeholder="Search"
                     className="me-2"
                     aria-label="Search"
-                    value={formData.description}
+                    value={formData.searchTerm}
                     onChange={handleChange}
                 />
-            <Button variant="outline-success">Search</Button>
-        </Form>
+                <select
+                    name="searchMethod"
+                    type="select"
+                    placeholder="Search"
+                    className="me-2"
+                    aria-label="Search"
+                    value={formData.searchMethod}
+                    onChange={handleChange}>
+                    <option value="description">Description</option>
+                    <option value="make">Camera Make</option>
+                    <option value="model">Camera Model</option>
+                </select>
+            <button variant="outline-success">Search</button>
+        </form>
     )
 }
 

@@ -2,7 +2,7 @@
     margin-top: 20px;
 }
 
-.Editor .submit-btn {
+/* .Editor .submit-btn {
     background-color: #f7f7f7;
     border: none;
     border-radius: 6px;
@@ -14,7 +14,7 @@
     display: inline-block;
     font-size: 13px;
     transition: .5s linear ease-in-out;
-}
+} */
 
 .Editor .submit-btn:hover {
     transform: translate(-2px, -2px);
