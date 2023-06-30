@@ -1,7 +1,7 @@
 import axios from "axios";
 /** Api Calls - helper for all api calls */
 
-const BASE_URL = "http://localhost:5000/"
+const BASE_URL = "https://pixly-will.onrender.com/"
 
 async function uploadImage(fileName, imgBase64, exif, description) {
   await axios.post(BASE_URL,
